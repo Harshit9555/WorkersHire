@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WorkersHire - Payment</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f4f4;
+        }
+        .payment-container {
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            background: white;
+            margin-top: 50px;
+            margin-bottom: 50px;
+        }
+        .order-summary {
+            border-radius: 15px;
+            background-color: #f8f9fa;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .payment-method {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .payment-method:hover, .payment-method.active {
+            border-color: #0d6efd;
+            background-color: #f0f7ff;
+        }
+        .payment-method.active {
+            box-shadow: 0 0 0 2px #0d6efd;
+        }
+        .payment-method img {
+            height: 30px;
+            margin-right: 10px;
+        }
+        .secure-badge {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            color: #198754;
+            margin-top: 20px;
+        }
+        .secure-badge svg {
+            margin-right: 5px;
+        }
+        #payment-success {
+            display: none;
+            text-align: center;
+            padding: 30px;
+        }
+        #payment-success .check-circle {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #198754;
+            color: white;
+            border-radius: 50%;
+            font-size: 40px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow">
+        <div class="container">
+            <a class="navbar-brand" href="#"><h2>WorkersHire</h2></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="./index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="./services.html">Services</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 mx-auto">
+                <div class="payment-container" id="payment-form">
+                    <h2 class="text-center mb-4">Complete Your Booking</h2>
+                    
+                    <div class="order-summary mb-4">
+                        <h4>Order Summary</h4>
+                        <div class="d-flex justify-content-between">
+                            <span>Service:</span>
+                            <span id="selected-service">Packages</span>
+                        </div>
+                        <div class="d-flex justify-content-between mt-2">
+                            <span>Price:</span>
+                            <span id="service-price">₹15,000 - ₹35,000</span>
+                        </div>
+                        <div class="d-flex justify-content-between mt-2">
+                            <span>Booking Fee:</span>
+                            <span>₹500</span>
+                        </div>
+                        <hr>
+                        <div class="d-flex justify-content-between fw-bold">
+                            <span>Total Amount Due:</span>
+                            <span id="total-amount">₹500</span>
+                        </div>
+                        <div class="small text-muted mt-2">
+                            * Booking fee is non-refundable. Final service cost will be determined after site assessment.
+                        </div>
+                    </div>
+
+                    <h4 class="mb-3">Select Payment Method</h4>
+                    <div class="payment-methods">
+                        <div class="payment-method active d-flex align-items-center" onclick="selectPayment(this, 'card')">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="payment-method" id="card-radio" checked>
+                            </div>
+                            <label class="ms-2 d-flex align-items-center flex-grow-1" for="card-radio">
+                                <span>Credit/Debit Card</span>
+                                <div class="ms-auto">
+                                    <img src="/api/placeholder/40/25" alt="Visa" class="me-1">
+                                    <img src="/api/placeholder/40/25" alt="Mastercard" class="me-1">
+                                    <img src="/api/placeholder/40/25" alt="RuPay">
+                                </div>
+                            </label>
+                        </div>
+
+                        <div class="payment-method d-flex align-items-center" onclick="selectPayment(this, 'upi')">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="payment-method" id="upi-radio">
+                            </div>
+                            <label class="ms-2 d-flex align-items-center flex-grow-1" for="upi-radio">
+                                <span>UPI</span>
+                                <div class="ms-auto">
+                                    <img src="/api/placeholder/40/25" alt="UPI" class="me-1">
+                                    <img src="/api/placeholder/40/25" alt="GPay" class="me-1">
+                                    <img src="/api/placeholder/40/25" alt="PhonePe">
+                                </div>
+                            </label>
+                        </div>
+
+                        <div class="payment-method d-flex align-items-center" onclick="selectPayment(this, 'netbanking')">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="payment-method" id="netbanking-radio">
+                            </div>
+                            <label class="ms-2" for="netbanking-radio">Net Banking</label>
+                        </div>
+                    </div>
+
+                    <div id="card-payment-form" class="mt-4">
+                        <div class="mb-3">
+                            <label for="card-name" class="form-label">Name on Card</label>
+                            <input type="text" class="form-control" id="card-name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="card-number" class="form-label">Card Number</label>
+                            <input type="text" class="form-control" id="card-number" placeholder="1234 5678 9012 3456" required>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="expiry-date" class="form-label">Expiry Date</label>
+                                <input type="text" class="form-control" id="expiry-date" placeholder="MM/YY" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="cvv" class="form-label">CVV</label>
+                                <input type="text" class="form-control" id="cvv" placeholder="123" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="upi-payment-form" class="mt-4 d-none">
+                        <div class="mb-3">
+                            <label for="upi-id" class="form-label">UPI ID</label>
+                            <input type="text" class="form-control" id="upi-id" placeholder="name@bankname" required>
+                        </div>
+                    </div>
+
+                    <div id="netbanking-payment-form" class="mt-4 d-none">
+                        <div class="mb-3">
+                            <label for="bank-select" class="form-label">Select Bank</label>
+                            <select class="form-select" id="bank-select" required>
+                                <option value="" selected disabled>Choose your bank</option>
+                                <option value="sbi">State Bank of India</option>
+                                <option value="hdfc">HDFC Bank</option>
+                                <option value="icici">ICICI Bank</option>
+                                <option value="axis">Axis Bank</option>
+                                <option value="pnb">Punjab National Bank</option>
+                                <option value="other">Other Banks</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-check mb-3 mt-4">
+                        <input class="form-check-input" type="checkbox" id="terms-check" required>
+                        <label class="form-check-label" for="terms-check">
+                            I agree to the <a href="#">terms and conditions</a> and <a href="#">privacy policy</a>
+                        </label>
+                    </div>
+
+                    <button type="button" class="btn btn-primary btn-lg w-100" onclick="processPayment()">Pay ₹500 & Confirm Booking</button>
+                    
+                    <div class="secure-badge mt-3 text-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-shield-check" viewBox="0 0 16 16">
+                            <path d="M5.338 1.59a61.44 61.44 0 0 0-2.837.856.481.481 0 0 0-.328.39c-.554 4.157.726 7.19 2.253 9.188a10.725 10.725 0 0 0 2.287 2.233c.346.244.652.42.893.533.12.057.218.095.293.118a.55.55 0 0 0 .101.025.615.615 0 0 0 .1-.025c.076-.023.174-.061.294-.118.24-.113.547-.29.893-.533a10.726 10.726 0 0 0 2.287-2.233c1.527-1.997 2.807-5.031 2.253-9.188a.48.48 0 0 0-.328-.39c-.651-.213-1.75-.56-2.837-.855C9.552 1.29 8.531 1.067 8 1.067c-.53 0-1.552.223-2.662.524zM5.072.56C6.157.265 7.31 0 8 0s1.843.265 2.928.56c1.11.3 2.229.655 2.887.87a1.54 1.54 0 0 1 1.044 1.262c.596 4.477-.787 7.795-2.465 9.99a11.775 11.775 0 0 1-2.517 2.453 7.159 7.159 0 0 1-1.048.625c-.28.132-.581.24-.829.24s-.548-.108-.829-.24a7.158 7.158 0 0 1-1.048-.625 11.777 11.777 0 0 1-2.517-2.453C1.928 10.487.545 7.169 1.141 2.692A1.54 1.54 0 0 1 2.185 1.43 62.456 62.456 0 0 1 5.072.56z"/>
+                            <path d="M10.854 5.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 7.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
+                        </svg>
+                        Secure Payment | 256-bit SSL Encrypted
+                    </div>
+                </div>
+
+                <!-- Success Message (Hidden by default) -->
+                <div class="payment-container" id="payment-success">
+                    <div class="check-circle">✓</div>
+                    <h2 class="mb-4">Payment Successful!</h2>
+                    <p>Your booking has been confirmed. Booking Reference: <strong id="booking-ref">WH-MS-2025-</strong></p>
+                    <p>A confirmation email has been sent to your registered email address.</p>
+                    <p class="mt-4">Our team will contact you within 24 hours to schedule an initial site assessment.</p>
+                    <div class="mt-4">
+                        <a href="./index.html" class="btn btn-outline-primary me-2">Return to Home</a>
+                        <a href="./services.html" class="btn btn-primary">Explore More Services</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Get URL parameters to determine which package was selected
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const packageType = urlParams.get('package');
+            const serviceType = urlParams.get('service');
+            
+            if (packageType) {
+                updateOrderSummary(packageType);
+            } else if (serviceType) {
+                updateServiceType(serviceType);
+            }
+        };
+        
+        function updateOrderSummary(packageType) {
+            const serviceElement = document.getElementById('selected-service');
+            const priceElement = document.getElementById('service-price');
+            
+            switch(packageType) {
+                case 'basic':
+                    serviceElement.textContent = 'Mason Services - Basic Package';
+                    priceElement.textContent = '₹7,000 - ₹15,000';
+                    break;
+                case 'standard':
+                    serviceElement.textContent = 'Mason Services - Standard Package';
+                    priceElement.textContent = '₹15,000 - ₹35,000';
+                    break;
+                case 'premium':
+                    serviceElement.textContent = 'Mason Services - Premium Package';
+                    priceElement.textContent = '₹35,000+';
+                    break;
+                default:
+                    serviceElement.textContent = 'Mason Services';
+                    priceElement.textContent = 'To be determined';
+            }
+        }
+        // Continue from the previous script section
+
+function updateServiceType(serviceType) {
+    const serviceElement = document.getElementById('selected-service');
+    serviceElement.textContent = 'Mason Services - ' + serviceType;
+}
+
+function selectPayment(element, method) {
+    // Remove active class from all payment methods
+    const methods = document.querySelectorAll('.payment-method');
+    methods.forEach(item => {
+        item.classList.remove('active');
+        item.querySelector('input').checked = false;
+    });
+    
+    // Add active class to selected method
+    element.classList.add('active');
+    element.querySelector('input').checked = true;
+    
+    // Show/hide payment forms
+    document.getElementById('card-payment-form').classList.add('d-none');
+    document.getElementById('upi-payment-form').classList.add('d-none');
+    document.getElementById('netbanking-payment-form').classList.add('d-none');
+    
+    document.getElementById(method + '-payment-form').classList.remove('d-none');
+}
+
+function processPayment() {
+    // Basic validation
+    const activeMethod = document.querySelector('.payment-method.active');
+    if (!activeMethod) {
+        alert('Please select a payment method');
+        return;
+    }
+    
+    if (!document.getElementById('terms-check').checked) {
+        alert('Please agree to the terms and conditions');
+        return;
+    }
+    
+    // Form validation based on payment method
+    const paymentType = activeMethod.querySelector('input').id.split('-')[0];
+    
+    if (paymentType === 'card') {
+        const cardName = document.getElementById('card-name').value;
+        const cardNumber = document.getElementById('card-number').value;
+        const expiryDate = document.getElementById('expiry-date').value;
+        const cvv = document.getElementById('cvv').value;
+        
+        if (!cardName || !cardNumber || !expiryDate || !cvv) {
+            alert('Please fill all card details');
+            return;
+        }
+        
+        // Basic card validation (simplified)
+        if (cardNumber.replace(/\s/g, '').length !== 16) {
+            alert('Please enter a valid 16-digit card number');
+            return;
+        }
+        
+        if (cvv.length < 3) {
+            alert('Please enter a valid CVV');
+            return;
+        }
+    } else if (paymentType === 'upi') {
+        const upiId = document.getElementById('upi-id').value;
+        
+        if (!upiId) {
+            alert('Please enter your UPI ID');
+            return;
+        }
+        
+        if (!upiId.includes('@')) {
+            alert('Please enter a valid UPI ID');
+            return;
+        }
+    } else if (paymentType === 'netbanking') {
+        const bank = document.getElementById('bank-select').value;
+        
+        if (!bank) {
+            alert('Please select your bank');
+            return;
+        }
+    }
+    
+    // Show loading indicator
+    const buttonElement = document.querySelector('button[onclick="processPayment()"]');
+    const originalText = buttonElement.textContent;
+    buttonElement.disabled = true;
+    buttonElement.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Processing...';
+    
+    // Simulate payment processing (replace with actual payment gateway integration)
+    setTimeout(() => {
+        // Generate a random booking reference
+        const bookingRef = 'WH-MS-' + new Date().getFullYear() + '-' + Math.floor(1000 + Math.random() * 9000);
+        document.getElementById('booking-ref').textContent = bookingRef;
+        
+        // Hide payment form and show success message
+        document.getElementById('payment-form').style.display = 'none';
+        document.getElementById('payment-success').style.display = 'block';
+        
+        // Scroll to top of the page
+        window.scrollTo(0, 0);
+    }, 2000);
+}
+
+// Helper function to format credit card number with spaces
+document.getElementById('card-number').addEventListener('input', function(e) {
+    // Remove all non-digits
+    let value = this.value.replace(/\D/g, '');
+    
+    // Add a space after every 4 digits
+    value = value.replace(/(\d{4})(?=\d)/g, '$1 ');
+    
+    // Update the input value
+    this.value = value;
+});
+
+// Format expiry date as MM/YY
+document.getElementById('expiry-date').addEventListener('input', function(e) {
+    let value = this.value.replace(/\D/g, '');
+    
+    if (value.length > 2) {
+        value = value.substring(0, 2) + '/' + value.substring(2, 4);
+    }
+    
+    this.value = value;
+});
+
+// Limit CVV to 3 or 4 digits
+document.getElementById('cvv').addEventListener('input', function(e) {
+    let value = this.value.replace(/\D/g, '');
+    this.value = value.substring(0, 4);
+});

@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WorkersHire - Electrician Services</title>
+    <link rel="stylesheet" href="style1.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f4f4;
+        }
+        .hero {
+            background: url('./images/electrician-hero.jpg') no-repeat center center/cover;
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.7);
+            position: relative;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+        }
+        .hero .container {
+            position: relative;
+            z-index: 2;
+        }
+        .service-detail {
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            background: white;
+            margin-bottom: 30px;
+        }
+        .package-card {
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            transition: 0.3s;
+            background: white;
+            text-align: center;
+            height: 100%;
+        }
+        .package-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3);
+        }
+        .testimonial-card {
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            background: white;
+            margin-bottom: 20px;
+        }
+        .testimonial-card img {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .rating {
+            color: #ffc107;
+            font-size: 20px;
+            margin: 10px 0;
+        }
+        .form-container {
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            background: white;
+        }
+        .service-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: #ffc107;
+        }
+        .emergency-banner {
+            background-color: #dc3545;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow">
+        <div class="container">
+            <a class="navbar-brand" href="#"><h2>WorkersHire</h2></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="container">
+            <h1>Professional Electrical Services</h1>
+            <p>Licensed and experienced electricians at your service</p>
+        </div>
+    </header>
+
+    <section class="container my-5">
+        <div class="emergency-banner text-center">
+            <h3 class="mb-2">24/7 Emergency Electrical Services Available</h3>
+            <p class="mb-0">Call our emergency hotline: <strong>1800-123-4567</strong></p>
+        </div>
+
+        <div class="service-detail">
+            <div class="row">
+                <div class="col-md-6">
+                    <img src="../images/electrician.png" alt="Electrician" class="img-fluid rounded">
+                </div>
+                <div class="col-md-6">
+                    <h2>Our Electrical Services</h2>
+                    <p>WorkersHire provides reliable and professional electrical services for residential and commercial properties. Our team of certified electricians is equipped to handle all types of electrical work, from minor repairs to complete installations.</p>
+                    <h4>Why Choose Our Electricians?</h4>
+                    <ul>
+                        <li>Licensed and certified professionals</li>
+                        <li>Safety-focused approach</li>
+                        <li>Up-to-date with electrical codes</li>
+                        <li>Prompt and reliable service</li>
+                        <li>Transparent pricing with no hidden fees</li>
+                    </ul>
+                    <button class="btn btn-primary btn-lg" onclick="window.location.href='payment.html'">Book a Electrician Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container my-5">
+        <h2 class="text-center mb-4">Our Electrical Services Include</h2>
+        <div class="row text-center">
+            <div class="col-md-4 mb-4">
+                <div class="package-card">
+                    <div class="service-icon">⚡</div>
+                    <h3>Electrical Repairs</h3>
+                    <p>Troubleshooting and fixing electrical issues, circuit breaker replacements, and outlet repairs.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="package-card">
+                    <div class="service-icon">💡</div>
+                    <h3>Lighting Installation</h3>
+                    <p>Installation of indoor and outdoor lighting fixtures, ceiling fans, and chandeliers.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="package-card">
+                    <div class="service-icon">🔌</div>
+                    <h3>Wiring & Rewiring</h3>
+                    <p>Complete home or office wiring, rewiring of old electrical systems, and cable management.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="package-card">
+                    <div class="service-icon">🔋</div>
+                    <h3>Power Backup Solutions</h3>
+                    <p>Installation and maintenance of inverters, generators, and UPS systems.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="package-card">
+                    <div class="service-icon">📺</div>
+                    <h3>Home Entertainment Setup</h3>
+                    <p>Installation of home theater systems, TV mounting, and audio system wiring.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="package-card">
+                    <div class="service-icon">🏠</div>
+                    <h3>Smart Home Solutions</h3>
+                    <p>Installation of smart switches, automated lighting, and home automation systems.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container my-5">
+        <h2 class="text-center mb-4">Our Electrical Service Packages</h2>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="package-card">
+                    <h3>Basic Package</h3>
+                    <h4>₹1,500 - ₹3,000</h4>
+                    <hr>
+                    <ul class="text-start">
+                        <li>Basic electrical repairs</li>
+                        <li>Switch/outlet replacement</li>
+                        <li>Fan installation</li>
+                        <li>Light fixture replacement</li>
+                        <li>Basic troubleshooting</li>
+                    </ul>
+                    <button class="btn btn-outline-primary w-100" onclick="window.location.href='payment.html?package=basic'">Select Package</button>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="package-card">
+                    <h3>Standard Package</h3>
+                    <h4>₹3,000 - ₹8,000</h4>
+                    <hr>
+                    <ul class="text-start">
+                        <li>Circuit breaker installation</li>
+                        <li>Partial house rewiring</li>
+                        <li>Chandelier installation</li>
+                        <li>Appliance circuit setup</li>
+                        <li>Electrical safety inspection</li>
+                    </ul>
+                    <button class="btn btn-primary w-100" onclick="window.location.href='payment.html?package=standard'">Select Package</button>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="package-card">
+                    <h3>Premium Package</h3>
+                    <h4>₹8,000+</h4>
+                    <hr>
+                    <ul class="text-start">
+                        <li>Complete house rewiring</li>
+                        <li>Smart home installations</li>
+                        <li>Panel upgrades</li>
+                        <li>Generator installation</li>
+                        <li>Comprehensive electrical solutions</li>
+                    </ul>
+                    <button class="btn btn-outline-primary w-100" onclick="window.location.href='payment.html?package=premium'">Select Package</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container my-5">
+        <h2 class="text-center mb-4">Electrical Safety Tips</h2>
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <div class="service-detail">
+                    <h3>Prevent Electrical Hazards</h3>
+                    <ul>
+                        <li>Never overload outlets with too many devices</li>
+                        <li>Replace frayed or damaged cords immediately</li>
+                        <li>Keep electrical appliances away from water</li>
+                        <li>Use surge protectors for expensive electronics</li>
+                        <li>Turn off power at the circuit breaker before doing any electrical work</li>
+                        <li>Have regular electrical safety inspections</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="service-detail">
+                    <h3>Warning Signs of Electrical Problems</h3>
+                    <ul>
+                        <li>Frequent circuit breaker trips</li>
+                        <li>Flickering or dimming lights</li>
+                        <li>Buzzing sounds from outlets</li>
+                        <li>Warm or discolored outlet covers</li>
+                        <li>Burning smell from appliances or outlets</li>
+                        <li>Mild shock or tingling feeling when touching appliances</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container my-5">
+        <h2 class="text-center mb-4">Our Work Process</h2>
+        <div class="row">
+            <div class="col-md-3 text-center mb-4">
+                <div class="bg-primary text-white rounded-circle d-inline-flex justify-content-center align-items-center mb-3" style="width: 80px; height: 80px;">
+                    <h3>1</h3>
+                </div>
+                <h4>Assessment</h4>
+                <p>We evaluate your electrical needs and provide a detailed estimate</p>
+            </div>
+            <div class="col-md-3 text-center mb-4">
+                <div class="bg-primary text-white rounded-circle d-inline-flex justify-content-center align-items-center mb-3" style="width: 80px; height: 80px;">
+                    <h3>2</h3>
+                </div>
+                <h4>Planning</h4>
+                <p>We develop a comprehensive plan and schedule the work</p>
+            </div>
+            <div class="col-md-3 text-center mb-4">
+                <div class="bg-primary text-white rounded-circle d-inline-flex justify-content-center align-items-center mb-3" style="width: 80px; height: 80px;">
+                    <h3>3</h3>
+                </div>
+                <h4>Execution</h4>
+                <p>Our licensed electricians perform the work with precision</p>
+            </div>
+            <div class="col-md-3 text-center mb-4">
+                <div class="bg-primary text-white rounded-circle d-inline-flex justify-content-center align-items-center mb-3" style="width: 80px; height: 80px;">
+                    <h3>4</h3>
+                </div>
+                <h4>Inspection</h4>
+                <p>We test all work and ensure it meets safety standards</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="container my-5">
+        <h2 class="text-center mb-4">Client Testimonials</h2>
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <div class="testimonial-card">
+                    <div class="d-flex align-items-center mb-3">
+                        <img src="./images/client1.jpg" alt="Client" class="me-3">
+                        <div>
+                            <h5 class="mb-0">Amit Kumar</h5>
+                            <p class="text-muted mb-0">Hyderabad</p>
+                        </div>
+                    </div>
+                    <div class="rating">★★★★★</div>
+                    <p>"The electrician from WorkersHire was professional and knowledgeable. He quickly identified the issue with our circuit breaker and fixed it efficiently. Great service and reasonable pricing!"</p>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="testimonial-card">
+                    <div class="d-flex align-items-center mb-3">
+                        <img src="./images/client2.jpg" alt="Client" class="me-3">
+                        <div>
+                            <h5 class="mb-0">Meera Joshi</h5>
+                            <p class="text-muted mb-0">Pune</p>
+                        </div>
+                    </div>
+                    <div class="rating">★★★★★</div>
+                    <p>"I needed to install ceiling fans and new light fixtures in my new apartment. The electrician did an excellent job and even helped me choose energy-efficient options. Highly recommend their services!"</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container my-5">
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <h2>Book an Electrician</h2>
+                <div class="form-container">
+                    <form>
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email Address</label>
+                            <input type="email" class="form-control" id="email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="phone" class="form-label">Phone Number</label>
+                            <input type="tel" class="form-control" id="phone" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="address" class="form-label">Address</label>
+                            <textarea class="form-control" id="address" rows="3" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="service" class="form-label">Service Type</label>
+                            <select class="form-select" id="service" required>
+                                <option selected disabled value="">Choose a service</option>
+                                <option>Electrical Repair</option>
+                                <option>Installation</option>
+                                <option>Wiring/Rewiring</option>
+                                <option>Lighting System</option>
+                                <option>Circuit Breaker Issues</option>
+                                <option>Smart Home Setup</option>
+                                <option>Emergency Service</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="urgency" class="form-label">Urgency Level</label>
+                            <select class="form-select" id="urgency" required>
+                                <option selected disabled value="">Select urgency level</option>
+                                <option>Emergency - Need help immediately</option>
+                                <option>Urgent - Within 24 hours</option>
+                                <option>Standard - Within a week</option>
+                                <option>Flexible - Schedule at your convenience</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="date" class="form-label">Preferred Date</label>
+                            <input type="date" class="form-control" id="date" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="message" class="form-label">Describe Your Electrical Issue</label>
+                            <textarea class="form-control" id="message" rows="3"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit Booking</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <h2>Frequently Asked Questions</h2>
+                <div class="accordion" id="faqAccordion">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                How quickly can an electrician arrive at my location?
+                            </button>
+                        </h2>
+                        <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                For emergency services, our electricians typically arrive within 1-2 hours. For standard service requests, we can schedule appointments within 24-48 hours in most locations.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                Are your electricians licensed and insured?
+                            </button>
+                        </h2>
+                        <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Yes, all our electricians are fully licensed, certified, and insured. We maintain strict quality standards and ensure all our professionals have the necessary qualifications and expertise.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                Do you provide warranties for electrical work?
+                            </button>
+                        </h2>
+                        <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Yes, we offer a 90-day warranty on all labor and workmanship. Additionally, any parts or products installed carry the manufacturer's warranty. We stand behind the quality of our work.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                                What payment methods do you accept?
+                            </button>
+                        </h2>
+                        <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                We accept multiple payment methods including cash, credit/debit cards, UPI, and bank transfers. Payment is typically collected after the service has been completed to your satisfaction.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container my-5">
+        <div class="service-detail">
+            <h2 class="text-center mb-4">Electrical Maintenance Plans</h2>
+            <p class="text-center mb-4">Keep your electrical systems in top condition with our maintenance plans</p>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="package-card">
+                        <h3>Residential Plan</h3>
+                        <h4>₹5,000/year</h4>
+                        <hr>
+                        <ul class="text-start">
+                            <li>Bi-annual safety inspections</li>
+                            <li>Preventive maintenance</li>
+                            <li>Priority scheduling</li>
+                            <li>10% discount on all services</li>
+                            <li>24/7 emergency support</li>
+                        </ul>
+                        <button class="btn btn-outline-primary w-100">Sign Up</button>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="package-card">
+                        <h3>Commercial Basic</h3>
+                        <h4>₹15,000/year</h4>
+                        <hr>
+                        <ul class="text-start">
+                            <li>Quarterly safety inspections</li>
+                            <li>Preventive maintenance</li>
+                            <li>Priority scheduling</li>
+                            <li>15% discount on all services</li>
+                            <li>24/7 emergency support</li>
+                        </ul>
+                        <button class="btn btn-primary w-100">Sign Up</button>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="package-card">
+                        <h3>Commercial Premium</h3>
+                        <h4>₹30,000/year</h4>
+                        <hr>
+                        <ul class="text-start">
+                            <li>Monthly safety inspections</li>
+                            <li>Comprehensive maintenance</li>
+                            <li>Same-day service</li>
+                            <li>20% discount on all services</li>
+                            <li>Dedicated account manager</li>
+                        </ul>
+                        <button class="btn btn-outline-primary w-100">Sign Up</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-dark text-white py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <h4>WorkersHire</h4>
+                    <p>Your trusted source for professional electrical services. Licensed electricians for all your residential and commercial needs.</p>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <h4>Contact Us</h4>
+                    <p>Email: info@workershire.com</p>
+                    <p>Phone: 1800-123-4567</p>
+                    <p>Emergency: 1800-999-8888</p>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <h4>Quick Links</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html" class="text-white">Home</a></li>
+                        <li><a href="services.html" class="text-white">Services</a></li>
+                        <li><a href="#" class="text-white">About Us</a></li>
+                        <li><a href="#" class="text-white">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-3 bg-light">
+            <div class="text-center">
+                <p>&copy; 2025 WorkersHire. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get the selected service
+            const serviceSelect = document.getElementById('service');
+            const selectedService = serviceSelect.options[serviceSelect.selectedIndex].text;
+            
+            // Redirect to payment page with the service parameter
+            window.location.href = 'payment.html?service=' + encodeURIComponent(selectedService);
+        });
+        </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>    

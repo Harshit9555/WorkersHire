@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WorkersHire - Cook Services</title>
+    <link rel="stylesheet" href="style1.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f4f4;
+        }
+        .hero {
+            background: url('./images/cook-hero.jpg') no-repeat center center/cover;
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.7);
+            position: relative;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+        }
+        .hero .container {
+            position: relative;
+            z-index: 2;
+        }
+        .service-detail {
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            background: white;
+            margin-bottom: 30px;
+        }
+        .package-card {
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            transition: 0.3s;
+            background: white;
+            text-align: center;
+            height: 100%;
+        }
+        .package-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3);
+        }
+        .testimonial-card {
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            background: white;
+            margin-bottom: 20px;
+        }
+        .testimonial-card img {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .rating {
+            color: #ffc107;
+            font-size: 20px;
+            margin: 10px 0;
+        }
+        .form-container {
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            background: white;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow">
+        <div class="container">
+            <a class="navbar-brand" href="#"><h2>WorkersHire</h2></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="./index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="./services.html">Services</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="container">
+            <h1>Professional Cooking Services</h1>
+            <p>Enjoy delicious meals prepared by our expert cooks</p>
+        </div>
+    </header>
+
+    <section class="container my-5">
+        <div class="service-detail">
+            <div class="row">
+                <div class="col-md-6">
+                    <img src="../images/cook.png" alt="Cook" class="img-fluid rounded">
+                </div>
+                <div class="col-md-6">
+                    <h2>Our Cooking Services</h2>
+                    <p>At WorkersHire, we provide exceptional cooking services for homes, events, and businesses. Our team of professional cooks is skilled in preparing a variety of cuisines, from traditional Indian dishes to international specialties, catering to different dietary preferences and requirements.</p>
+                    <h4>Why Choose Our Cooks?</h4>
+                    <ul>
+                        <li>Professionally trained and experienced chefs</li>
+                        <li>Fresh ingredients and quality preparation</li>
+                        <li>Customizable menus to suit your preferences</li>
+                        <li>Hygienic cooking practices</li>
+                        <li>Affordable pricing options</li>
+                    </ul>
+                    <button class="btn btn-primary btn-lg" onclick="window.location.href='payment.html'">Book a Cook Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container my-5">
+        <h2 class="text-center mb-4">Our Cooking Packages</h2>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="package-card">
+                    <h3>Basic Package</h3>
+                    <h4>₹8,000 - ₹12,000/month</h4>
+                    <hr>
+                    <ul class="text-start">
+                        <li>Daily cooking (one meal)</li>
+                        <li>Standard menu options</li>
+                        <li>Serves up to 4 people</li>
+                        <li>Basic Indian cuisine</li>
+                        <li>Grocery list preparation</li>
+                    </ul>
+                    <button class="btn btn-outline-primary w-100" onclick="window.location.href='payment.html?package=basic'">Select Package</button>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="package-card">
+                    <h3>Standard Package</h3>
+                    <h4>₹15,000 - ₹25,000/month</h4>
+                    <hr>
+                    <ul class="text-start">
+                        <li>Daily cooking (two meals)</li>
+                        <li>Customizable menu options</li>
+                        <li>Serves up to 6 people</li>
+                        <li>Multi-cuisine options</li>
+                        <li>Grocery shopping assistance</li>
+                    </ul>
+                    <button class="btn btn-primary w-100" onclick="window.location.href='payment.html?package=standard'">Select Package</button>
+
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="package-card">
+                    <h3>Premium Package</h3>
+                    <h4>₹30,000+/month</h4>
+                    <hr>
+                    <ul class="text-start">
+                        <li>Full-day cooking (all meals)</li>
+                        <li>Gourmet menu options</li>
+                        <li>Serves 8+ people</li>
+                        <li>Specialized diets & international cuisine</li>
+                        <li>Complete meal planning & grocery management</li>
+                    </ul>
+                    <button class="btn btn-outline-primary w-100" onclick="window.location.href='payment.html?package=premium'">Select Package</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container my-5">
+        <h2 class="text-center mb-4">Our Service Process</h2>
+        <div class="row">
+            <div class="col-md-3 text-center mb-4">
+                <div class="bg-primary text-white rounded-circle d-inline-flex justify-content-center align-items-center mb-3" style="width: 80px; height: 80px;">
+                    <h3>1</h3>
+                </div>
+                <h4>Consultation</h4>
+                <p>We discuss your dietary needs, preferences, and schedule</p>
+            </div>
+            <div class="col-md-3 text-center mb-4">
+                <div class="bg-primary text-white rounded-circle d-inline-flex justify-content-center align-items-center mb-3" style="width: 80px; height: 80px;">
+                    <h3>2</h3>
+                </div>
+                <h4>Menu Planning</h4>
+                <p>We create a customized menu based on your requirements</p>
+            </div>
+            <div class="col-md-3 text-center mb-4">
+                <div class="bg-primary text-white rounded-circle d-inline-flex justify-content-center align-items-center mb-3" style="width: 80px; height: 80px;">
+                    <h3>3</h3>
+                </div>
+                <h4>Cooking</h4>
+                <p>Our professional cooks prepare delicious meals at your location</p>
+            </div>
+            <div class="col-md-3 text-center mb-4">
+                <div class="bg-primary text-white rounded-circle d-inline-flex justify-content-center align-items-center mb-3" style="width: 80px; height: 80px;">
+                    <h3>4</h3>
+                </div>
+                <h4>Feedback</h4>
+                <p>We adjust our cooking based on your feedback and preferences</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="container my-5">
+        <h2 class="text-center mb-4">Client Testimonials</h2>
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <div class="testimonial-card">
+                    <div class="d-flex align-items-center mb-3">
+                        <img src="./images/client1.jpg" alt="Client" class="me-3">
+                        <div>
+                            <h5 class="mb-0">Anita Desai</h5>
+                            <p class="text-muted mb-0">Bangalore</p>
+                        </div>
+                    </div>
+                    <div class="rating">★★★★★</div>
+                    <p>"The cook we hired through WorkersHire has been amazing! His food is delicious, and he's very accommodating of our dietary restrictions. Having a professional cook has made our family meals so much more enjoyable."</p>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="testimonial-card">
+                    <div class="d-flex align-items-center mb-3">
+                        <img src="./images/client2.jpg" alt="Client" class="me-3">
+                        <div>
+                            <h5 class="mb-0">Vikram Singh</h5>
+                            <p class="text-muted mb-0">Hyderabad</p>
+                        </div>
+                    </div>
+                    <div class="rating">★★★★★</div>
+                    <p>"We hired a cook for our small office, and it has been a great investment. Our team enjoys fresh, healthy meals daily, and the variety of dishes is impressive. The service is reliable and professional."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container my-5">
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <h2>Book a Cook</h2>
+                <div class="form-container">
+                    <form>
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email Address</label>
+                            <input type="email" class="form-control" id="email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="phone" class="form-label">Phone Number</label>
+                            <input type="tel" class="form-control" id="phone" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="address" class="form-label">Address</label>
+                            <textarea class="form-control" id="address" rows="3" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="service" class="form-label">Service Type</label>
+                            <select class="form-select" id="service" required>
+                                <option selected disabled value="">Choose a service</option>
+                                <option>Daily Home Cooking</option>
+                                <option>Special Event Catering</option>
+                                <option>Corporate Meals</option>
+                                <option>Party Cooking</option>
+                                <option>Specialized Diet Cooking</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="date" class="form-label">Preferred Start Date</label>
+                            <input type="date" class="form-control" id="date" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="message" class="form-label">Dietary Preferences/Restrictions</label>
+                            <textarea class="form-control" id="message" rows="3"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit Booking</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <h2>Frequently Asked Questions</h2>
+                <div class="accordion" id="faqAccordion">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                What cuisines do your cooks specialize in?
+                            </button>
+                        </h2>
+                        <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Our cooks are skilled in various cuisines including North Indian, South Indian, Chinese, Continental, and more. During the consultation, you can discuss your cuisine preferences, and we'll match you with a cook who specializes in those areas.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                Do I need to provide cooking equipment and ingredients?
+                            </button>
+                        </h2>
+                        <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Yes, you would need to provide the cooking equipment and ingredients. Our cooks can provide you with a list of necessary ingredients and can also assist with grocery shopping if you choose a higher-tier package.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                Can your cooks accommodate special dietary needs?
+                            </button>
+                        </h2>
+                        <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Absolutely! Our cooks can accommodate various dietary requirements such as vegetarian, vegan, gluten-free, low-carb, and more. Please mention any dietary restrictions during the booking process so we can assign a suitable cook.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                                How far in advance should I book a cook?
+                            </button>
+                        </h2>
+                        <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                For regular cooking services, we recommend booking at least 3-5 days in advance. For special events or catering services, 1-2 weeks advance booking is preferable to ensure availability and proper planning.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get the selected service
+            const serviceSelect = document.getElementById('service');
+            const selectedService = serviceSelect.options[serviceSelect.selectedIndex].text;
+            
+            // Redirect to payment page with the service parameter
+            window.location.href = 'payment.html?service=' + encodeURIComponent(selectedService);
+        });
+        </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

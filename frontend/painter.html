@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WorkersHire - Painter Services</title>
+    <link rel="stylesheet" href="style1.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f4f4;
+        }
+        .hero {
+            background: url('./images/painter-hero.jpg') no-repeat center center/cover;
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.7);
+            position: relative;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+        }
+        .hero .container {
+            position: relative;
+            z-index: 2;
+        }
+        .service-detail {
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            background: white;
+            margin-bottom: 30px;
+        }
+        .package-card {
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            transition: 0.3s;
+            background: white;
+            text-align: center;
+            height: 100%;
+        }
+        .package-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3);
+        }
+        .testimonial-card {
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            background: white;
+            margin-bottom: 20px;
+        }
+        .testimonial-card img {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .rating {
+            color: #ffc107;
+            font-size: 20px;
+            margin: 10px 0;
+        }
+        .form-container {
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            background: white;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow">
+        <div class="container">
+            <a class="navbar-brand" href="#"><h2>WorkersHire</h2></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="./index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="./services.html">Services</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="container">
+            <h1>Professional Painting Services</h1>
+            <p>Transform your space with our expert painters</p>
+        </div>
+    </header>
+
+    <section class="container my-5">
+        <div class="service-detail">
+            <div class="row">
+                <div class="col-md-6">
+                    <img src="../images/painter.png" alt="Painter" class="img-fluid rounded">
+                </div>
+                <div class="col-md-6">
+                    <h2>Our Painting Services</h2>
+                    <p>At WorkersHire, we provide professional painting services for both residential and commercial properties. Our team of skilled painters specializes in interior and exterior painting, bringing fresh life and vibrant colors to your spaces with expertise and precision.</p>
+                    <h4>Why Choose Our Painters?</h4>
+                    <ul>
+                        <li>Experienced and skilled painting professionals</li>
+                        <li>Premium quality paints and materials</li>
+                        <li>Meticulous surface preparation and finishing</li>
+                        <li>Timely project completion</li>
+                        <li>Competitive and transparent pricing</li>
+                    </ul>
+                    <button class="btn btn-primary btn-lg" onclick="window.location.href='payment.html'">Book a Painter Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container my-5">
+        <h2 class="text-center mb-4">Our Painting Packages</h2>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="package-card">
+                    <h3>Basic Package</h3>
+                    <h4>₹5,000 - ₹12,000</h4>
+                    <hr>
+                    <ul class="text-start">
+                        <li>Single room painting</li>
+                        <li>Basic wall preparation</li>
+                        <li>One coat primer</li>
+                        <li>Two coats of standard paint</li>
+                        <li>Basic finishing work</li>
+                    </ul>
+                    <button class="btn btn-outline-primary w-100" onclick="window.location.href='payment.html?package=basic'">Select Package</button>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="package-card">
+                    <h3>Standard Package</h3>
+                    <h4>₹12,000 - ₹30,000</h4>
+                    <hr>
+                    <ul class="text-start">
+                        <li>Multiple room painting</li>
+                        <li>Thorough surface preparation</li>
+                        <li>Quality primer application</li>
+                        <li>Two coats of premium paint</li>
+                        <li>Standard trim and detail work</li>
+                    </ul>
+                    <button class="btn btn-primary w-100" onclick="window.location.href='payment.html?package=standard'">Select Package</button>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="package-card">
+                    <h3>Premium Package</h3>
+                    <h4>₹30,000+</h4>
+                    <hr>
+                    <ul class="text-start">
+                        <li>Whole house painting</li>
+                        <li>Premium surface preparation</li>
+                        <li>High-quality primer</li>
+                        <li>Three coats of luxury paint</li>
+                        <li>Detailed trim and decorative finishes</li>
+                    </ul>
+                    <button class="btn btn-outline-primary w-100" onclick="window.location.href='payment.html?package=premium'">Select Package</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container my-5">
+        <h2 class="text-center mb-4">Our Painting Process</h2>
+        <div class="row">
+            <div class="col-md-3 text-center mb-4">
+                <div class="bg-primary text-white rounded-circle d-inline-flex justify-content-center align-items-center mb-3" style="width: 80px; height: 80px;">
+                    <h3>1</h3>
+                </div>
+                <h4>Consultation</h4>
+                <p>We assess your needs, recommend colors, and provide a detailed quote</p>
+            </div>
+            <div class="col-md-3 text-center mb-4">
+                <div class="bg-primary text-white rounded-circle d-inline-flex justify-content-center align-items-center mb-3" style="width: 80px; height: 80px;">
+                    <h3>2</h3>
+                </div>
+                <h4>Preparation</h4>
+                <p>We prepare surfaces by cleaning, sanding, and repairing imperfections</p>
+            </div>
+            <div class="col-md-3 text-center mb-4">
+                <div class="bg-primary text-white rounded-circle d-inline-flex justify-content-center align-items-center mb-3" style="width: 80px; height: 80px;">
+                    <h3>3</h3>
+                </div>
+                <h4>Painting</h4>
+                <p>Our skilled painters apply primer and multiple coats with precision</p>
+            </div>
+            <div class="col-md-3 text-center mb-4">
+                <div class="bg-primary text-white rounded-circle d-inline-flex justify-content-center align-items-center mb-3" style="width: 80px; height: 80px;">
+                    <h3>4</h3>
+                </div>
+                <h4>Final Inspection</h4>
+                <p>We ensure quality finish, clean up, and get your approval</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="container my-5">
+        <h2 class="text-center mb-4">Client Testimonials</h2>
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <div class="testimonial-card">
+                    <div class="d-flex align-items-center mb-3">
+                        <img src="./images/client1.jpg" alt="Client" class="me-3">
+                        <div>
+                            <h5 class="mb-0">Priya Sharma</h5>
+                            <p class="text-muted mb-0">Mumbai</p>
+                        </div>
+                    </div>
+                    <div class="rating">★★★★★</div>
+                    <p>"The painting team from WorkersHire did an exceptional job with my apartment. They were professional, neat, and completed the work ahead of schedule. The colors look beautiful and the finish is perfect. Highly recommend!"</p>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="testimonial-card">
+                    <div class="d-flex align-items-center mb-3">
+                        <img src="./images/client2.jpg" alt="Client" class="me-3">
+                        <div>
+                            <h5 class="mb-0">Rajesh Patel</h5>
+                            <p class="text-muted mb-0">Chennai</p>
+                        </div>
+                    </div>
+                    <div class="rating">★★★★★</div>
+                    <p>"We hired WorkersHire painters for our office renovation. Their team was efficient, professional, and delivered outstanding quality. The preparation work was thorough, and the paint application was flawless. Our office looks brand new!"</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container my-5">
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <h2>Book a Painter</h2>
+                <div class="form-container">
+                    <form>
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email Address</label>
+                            <input type="email" class="form-control" id="email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="phone" class="form-label">Phone Number</label>
+                            <input type="tel" class="form-control" id="phone" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="address" class="form-label">Address</label>
+                            <textarea class="form-control" id="address" rows="3" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="service" class="form-label">Service Type</label>
+                            <select class="form-select" id="service" required>
+                                <option selected disabled value="">Choose a service</option>
+                                <option>Interior Painting</option>
+                                <option>Exterior Painting</option>
+                                <option>Wall Texturing</option>
+                                <option>Ceiling Painting</option>
+                                <option>Cabinet Painting</option>
+                                <option>Decorative Finishing</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="date" class="form-label">Preferred Date</label>
+                            <input type="date" class="form-control" id="date" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="message" class="form-label">Additional Information</label>
+                            <textarea class="form-control" id="message" rows="3"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit Booking</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <h2>Frequently Asked Questions</h2>
+                <div class="accordion" id="faqAccordion">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                How long does it take to paint an average room?
+                            </button>
+                        </h2>
+                        <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                For an average-sized room (12x12 feet), our painters typically take 1-2 days to complete the job, including preparation, priming, and applying multiple coats. Larger or more complex rooms may take 2-3 days.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                What paint brands do you use?
+                            </button>
+                        </h2>
+                        <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                We use premium quality paints from trusted brands like Asian Paints, Berger, Dulux, and Nerolac. We can recommend the best paint type based on your requirements, environment, and budget.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                Do I need to move my furniture before you start painting?
+                            </button>
+                        </h2>
+                        <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                For best results, we recommend moving furniture to the center of the room or to another area. Our team can help with moving larger pieces and will cover all furniture and floors with protective sheets to prevent any paint splatters.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                                Do you provide a warranty for your painting work?
+                            </button>
+                        </h2>
+                        <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Yes, we provide a 1-year warranty on our painting services. If any issues arise due to poor workmanship within this period, we will fix them at no additional cost to you.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5">
+                                How do you ensure a smooth and durable finish?
+                            </button>
+                        </h2>
+                        <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Our process includes thorough surface preparation (cleaning, sanding, and filling imperfections), applying quality primer, and using multiple coats of paint with proper drying time between coats. We also use appropriate tools and techniques for different surfaces to ensure a smooth, even, and long-lasting finish.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get the selected service
+            const serviceSelect = document.getElementById('service');
+            const selectedService = serviceSelect.options[serviceSelect.selectedIndex].text;
+            
+            // Redirect to payment page with the service parameter
+            window.location.href = 'payment.html?service=' + encodeURIComponent(selectedService);
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
