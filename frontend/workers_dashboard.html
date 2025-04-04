@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WorkersHire - Worker Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f4f9;
+            min-height: 100vh;
+        }
+        .sidebar {
+            background: linear-gradient(to bottom, #007bff, #6610f2);
+            color: white;
+            height: 100vh;
+            position: fixed;
+            padding-top: 20px;
+            box-shadow: 3px 0px 10px rgba(0, 0, 0, 0.2);
+        }
+        .sidebar .nav-link {
+            color: rgba(255, 255, 255, 0.85);
+            border-radius: 5px;
+            margin: 5px 10px;
+            transition: all 0.3s;
+        }
+        .sidebar .nav-link:hover, .sidebar .nav-link.active {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+        .sidebar .nav-link i {
+            width: 24px;
+            text-align: center;
+            margin-right: 8px;
+        }
+        .logo {
+            padding: 15px;
+            margin-bottom: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+        }
+        .main-content {
+            margin-left: 250px;
+            padding: 20px;
+        }
+        .card {
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            transition: transform 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .stats-card {
+            background: linear-gradient(to right, #007bff, #00bfff);
+            color: white;
+            border: none;
+        }
+        .greeting-card {
+            background: linear-gradient(to right, #6610f2, #7f49f7);
+            color: white;
+            height: 180px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .profile-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid white;
+        }
+        .job-card {
+            border-left: 5px solid #007bff;
+        }
+        .job-card.completed {
+            border-left: 5px solid #28a745;
+        }
+        .job-card.pending {
+            border-left: 5px solid #ffc107;
+        }
+        .skill-badge {
+            background-color: #e9ecef;
+            border-radius: 30px;
+            padding: 5px 15px;
+            margin-right: 5px;
+            margin-bottom: 5px;
+            display: inline-block;
+            font-size: 14px;
+        }
+        .review-card {
+            position: relative;
+        }
+        .review-card .quote {
+            font-size: 72px;
+            position: absolute;
+            top: -10px;
+            right: 20px;
+            opacity: 0.1;
+        }
+        .rating {
+            color: #ffc107;
+        }
+        .header-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .header-search {
+            max-width: 350px;
+        }
+        .progress {
+            height: 10px;
+            border-radius: 5px;
+        }
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: #dc3545;
+            color: white;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            font-size: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 5px;
+            height: calc(100% - 10px);
+            width: 2px;
+            background-color: #dee2e6;
+        }
+        .timeline-item {
+            position: relative;
+            margin-bottom: 25px;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -36px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #007bff;
+        }
+        .activity-time {
+            color: #6c757d;
+            font-size: 14px;
+        }
+        .earnings-chart {
+            height: 300px;
+            margin-top: 20px;
+        }
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+        }
+    </style>
+</head>
+<body>
+    <!-- Toast notification container -->
+    <div class="toast-container"></div>
+
+    <!-- Sidebar -->
+    <div class="sidebar d-flex flex-column flex-shrink-0 p-3 text-white col-md-2">
+        <div class="logo mb-4">
+            <i class="fas fa-tools me-2"></i>WorkersHire
+        </div>
+        <ul class="nav nav-pills flex-column mb-auto">
+            <li class="nav-item">
+                <a href="#" class="nav-link active">
+                    <i class="fas fa-home"></i> Dashboard
+                </a>
+            </li>
+            <li>
+                <a href="#" class="nav-link text-white">
+                    <i class="fas fa-briefcase"></i> Jobs
+                </a>
+            </li>
+            <li>
+                <a href="#" class="nav-link text-white">
+                    <i class="fas fa-calendar"></i> Schedule
+                </a>
+            </li>
+            <li>
+                <a href="#" class="nav-link text-white">
+                    <i class="fas fa-comment"></i> Messages
+                </a>
+            </li>
+            <li>
+                <a href="#" class="nav-link text-white">
+                    <i class="fas fa-money-bill-wave"></i> Earnings
+                </a>
+            </li>
+            <li>
+                <a href="#" class="nav-link text-white">
+                    <i class="fas fa-star"></i> Reviews
+                </a>
+            </li>
+            <li>
+                <a href="#" class="nav-link text-white">
+                    <i class="fas fa-user-circle"></i> Profile
+                </a>
+            </li>
+            <li>
+                <a href="#" class="nav-link text-white">
+                    <i class="fas fa-cog"></i> Settings
+                </a>
+            </li>
+        </ul>
+        <hr>
+        <div class="dropdown">
+            <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="/api/placeholder/50/50" alt="profile" class="profile-img me-2">
+                <strong id="sidebarUsername">John Doe</strong>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+                <li><a class="dropdown-item" href="#">Settings</a></li>
+                <li><a class="dropdown-item" href="#">Profile</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="#" id="logoutBtn">Sign out</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="header-section">
+            <h2>Worker Dashboard</h2>
+            <div class="d-flex align-items-center">
+                <div class="position-relative me-4">
+                    <i class="fas fa-bell fa-lg"></i>
+                    <span class="notification-badge">3</span>
+                </div>
+                <div class="header-search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search...">
+                        <button class="btn btn-outline-secondary" type="button">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Greeting Card -->
+        <div class="row mb-4">
+            <div class="col-md-12">
+                <div class="card greeting-card">
+                    <div class="card-body">
+                        <h2 id="welcomeMessage">Welcome back, John!</h2>
+                        <p class="mb-0">You have 3 new job requests and 2 upcoming appointments today.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="row mb-4">
+            <div class="col-md-3">
+                <div class="card stats-card">
+                    <div class="card-body">
+                        <h5 class="card-title">Completed Jobs</h5>
+                        <h2 class="card-text">147</h2>
+                        <p class="card-text"><small>+12% from last month</small></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card stats-card">
+                    <div class="card-body">
+                        <h5 class="card-title">Total Earnings</h5>
+                        <h2 class="card-text">$4,325</h2>
+                        <p class="card-text"><small>+8% from last month</small></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card stats-card">
+                    <div class="card-body">
+                        <h5 class="card-title">Average Rating</h5>
+                        <h2 class="card-text">4.8/5</h2>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card stats-card">
+                    <div class="card-body">
+                        <h5 class="card-title">Response Rate</h5>
+                        <h2 class="card-text">95%</h2>
+                        <div class="progress mt-2">
+                            <div class="progress-bar bg-light" role="progressbar" style="width: 95%" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Recent Jobs -->
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header bg-white">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0">Recent Jobs</h5>
+                            <a href="#" class="btn btn-sm btn-outline-primary">View All</a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="job-card card mb-3">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h5 class="card-title">Home Electrical Repairs</h5>
+                                    <span class="badge bg-success">Completed</span>
+                                </div>
+                                <p class="card-text">Fixing electrical outlets and installing ceiling fans at residential property.</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <small class="text-muted"><i class="fas fa-map-marker-alt"></i> 123 Main St, City</small>
+                                        <small class="text-muted ms-3"><i class="fas fa-calendar"></i> Apr 2, 2025</small>
+                                    </div>
+                                    <div>
+                                        <span class="fw-bold">$120.00</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="job-card pending card mb-3">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h5 class="card-title">Kitchen Plumbing</h5>
+                                    <span class="badge bg-warning text-dark">Pending</span>
+                                </div>
+                                <p class="card-text">Installing new sink and fixing leaking pipes in kitchen area.</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <small class="text-muted"><i class="fas fa-map-marker-alt"></i> 456 Oak Ave, Town</small>
+                                        <small class="text-muted ms-3"><i class="fas fa-calendar"></i> Apr 5, 2025</small>
+                                    </div>
+                                    <div>
+                                        <span class="fw-bold">$180.00</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="job-card card mb-3">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h5 class="card-title">Interior Painting</h5>
+                                    <span class="badge bg-info">In Progress</span>
+                                </div>
+                                <p class="card-text">Painting living room and dining area with customer-provided colors.</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <small class="text-muted"><i class="fas fa-map-marker-alt"></i> 789 Pine St, Village</small>
+                                        <small class="text-muted ms-3"><i class="fas fa-calendar"></i> Apr 3-4, 2025</small>
+                                    </div>
+                                    <div>
+                                        <span class="fw-bold">$350.00</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Earnings Chart -->
+                <div class="card mt-4">
+                    <div class="card-header bg-white">
+                        <h5 class="mb-0">Monthly Earnings</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="earnings-chart">
+                            <img src="/api/placeholder/800/300" alt="Earnings Chart" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Sidebar -->
+            <div class="col-md-4">
+                <!-- Profile Quick View -->
+                <div class="card mb-4">
+                    <div class="card-body text-center">
+                        <img src="/api/placeholder/100/100" alt="profile" class="rounded-circle mb-3" style="width: 100px; height: 100px; object-fit: cover; border: 3px solid #007bff;">
+                        <h5 class="card-title" id="profileFullName">John Doe</h5>
+                        <p class="card-text text-muted" id="profileProfession">Electrician & Plumber</p>
+                        <div class="rating mb-3">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span class="ms-2">(147 reviews)</span>
+                        </div>
+                        <div class="mb-3" id="skillsContainer">
+                            <span class="skill-badge">Electrical</span>
+                            <span class="skill-badge">Plumbing</span>
+                            <span class="skill-badge">Repairs</span>
+                        </div>
+                        <button class="btn btn-primary">Edit Profile</button>
+                    </div>
+                </div>
+
+                <!-- Upcoming Appointments -->
+                <div class="card mb-4">
+                    <div class="card-header bg-white">
+                        <h5 class="mb-0">Upcoming Appointments</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <h6>Bathroom Plumbing</h6>
+                                <p class="mb-1">Fix shower leak at 123 Maple Dr.</p>
+                                <p class="activity-time"><i class="far fa-clock me-1"></i>Today, 2:00 PM</p>
+                            </div>
+                            <div class="timeline-item">
+                                <h6>Light Installation</h6>
+                                <p class="mb-1">Install LED lights at 456 Elm St.</p>
+                                <p class="activity-time"><i class="far fa-clock me-1"></i>Today, 5:30 PM</p>
+                            </div>
+                            <div class="timeline-item">
+                                <h6>Outdoor Wiring</h6>
+                                <p class="mb-1">Set up garden lighting at 789 Oak Ave.</p>
+                                <p class="activity-time"><i class="far fa-clock me-1"></i>Tomorrow, 10:00 AM</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Reviews -->
+                <div class="card">
+                    <div class="card-header bg-white">
+                        <h5 class="mb-0">Recent Reviews</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="review-card mb-3">
+                            <div class="quote">❝</div>
+                            <div class="rating mb-1">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p>"John was incredibly professional and fixed our electrical issue quickly. Would hire again!"</p>
+                            <p class="text-muted mb-0">- Sarah Johnson, Apr 1</p>
+                        </div>
+                        <div class="review-card">
+                            <div class="quote">❝</div>
+                            <div class="rating mb-1">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <p>"Great plumbing work! Fixed our leaky faucet and gave us tips to prevent future issues."</p>
+                            <p class="text-muted mb-0">- Michael Brown, Mar 28</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // API URL for backend interactions
+            const API_URL = 'http://localhost:3000/api'; // Update with your actual API URL
+
+            // Helper function to show toast notifications
+            function showToast(message, type = 'success') {
+                const toastContainer = document.querySelector('.toast-container');
+                const toast = document.createElement('div');
+                toast.className = `toast show bg-${type} text-white`;
+                toast.setAttribute('role', 'alert');
+                toast.setAttribute('aria-live', 'assertive');
+                toast.setAttribute('aria-atomic', 'true');
+                
+                toast.innerHTML = `
+                    <div class="toast-header bg-${type} text-white">
+                        <strong class="me-auto">${type === 'success' ? 'Success' : 'Alert'}</strong>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body">
+                        ${message}
+                    </div>
+                `;
+                
+                toastContainer.appendChild(toast);
+                
+                // Auto-dismiss after 5 seconds
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                    setTimeout(() => {
+                        toast.remove();
+                    }, 500);
+                }, 5000);
+            }
+
+            // Function to update UI with user information
+            function updateUIWithUserData() {
+                const userDataString = localStorage.getItem('user');
+                
+                if (userDataString) {
+                    try {
+                        const userData = JSON.parse(userDataString);
+                        
+                        // Update user name in all locations
+                        const firstName = userData.firstName || '';
+                        const lastName = userData.lastName || '';
+                        const fullName = `${firstName} ${lastName}`.trim();
+                        
+                        // Update sidebar username
+                        document.getElementById('sidebarUsername').textContent = fullName;
+                        
+                        // Update welcome message
+                        document.getElementById('welcomeMessage').textContent = 
+                            `Welcome back, ${firstName}!`;
+                        
+                        // Update profile name in card
+                        document.getElementById('profileFullName').textContent = fullName;
+                        
+                        // Update profession if available
+                        if (userData.profession) {
+                            document.getElementById('profileProfession').textContent = userData.profession;
+                        }
+                        
+                        // Update skills if available
+                        if (userData.skills) {
+                            const skillsContainer = document.getElementById('skillsContainer');
+                            skillsContainer.innerHTML = '';
+                            
+                            const skills = userData.skills.split(',').map(skill => skill.trim());
+                            skills.forEach(skill => {
+                                if (skill) {
+                                    const badge = document.createElement('span');
+                                    badge.className = 'skill-badge';
+                                    badge.textContent = skill;
+                                    skillsContainer.appendChild(badge);
+                                }
+                            });
+                        }
+                        
+                        // Show success toast
+                        showToast('Profile loaded successfully!');
+                    } catch (error) {
+                        console.error('Error parsing user data:', error);
+                        showToast('Error loading profile data', 'danger');
+                    }
+                } else {
+                    showToast('No user data found. Please log in again.', 'warning');
+                }
+            }
+
+            // Logout functionality
+            document.getElementById('logoutBtn').addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Clear all stored data
+                localStorage.removeItem('token');
+                localStorage.removeItem('user');
+                localStorage.removeItem('role');
+                
+                // Show toast notification
+                showToast('Logged out successfully! Redirecting to login page...');
+                
+                // Redirect to login page after short delay
+                setTimeout(() => {
+                    window.location.href = "index.html"; // Assuming login page is index.html
+                }, 2000);
+            });
+
+            // Add additional logout button in sidebar for more visibility (optional)
+            const sidebarNav = document.querySelector('.nav.nav-pills');
+            const logoutNavItem = document.createElement('li');
+            logoutNavItem.innerHTML = `
+                <a href="#" class="nav-link text-white" id="sidebarLogoutBtn">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </a>
+            `;
+            sidebarNav.appendChild(logoutNavItem);
+            
+            // Add event listener to the additional logout button
+            document.getElementById('sidebarLogoutBtn').addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Clear all stored data
+                localStorage.removeItem('token');
+                localStorage.removeItem('user');
+                localStorage.removeItem('role');
+                
+                // Show toast notification
+                showToast('Logged out successfully! Redirecting to login page...');
+                
+                // Redirect to login page after short delay
+                setTimeout(() => {
+                    window.location.href = "index.html"; // Assuming login page is index.html
+                }, 2000);
+            });
+
+            // Check if token exists on page load
+            const token = localStorage.getItem('token');
+            
+            if (!token) {
+                // No token found, redirect to login page
+                window.location.href = "index.html";
+                return;
+            }
+            
+            // Update UI with user data
+            updateUIWithUserData();
+        });
+    </script>
+</body>
+</html>
