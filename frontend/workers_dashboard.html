@@ -192,12 +192,12 @@
                 </a>
             </li>
             <li>
-                <a href="#" class="nav-link text-white">
+                <a href="#jobs" class="nav-link text-white">
                     <i class="fas fa-briefcase"></i> Jobs
                 </a>
             </li>
             <li>
-                <a href="#" class="nav-link text-white">
+                <a href="#schedule" class="nav-link text-white">
                     <i class="fas fa-calendar"></i> Schedule
                 </a>
             </li>
@@ -207,12 +207,12 @@
                 </a>
             </li>
             <li>
-                <a href="#" class="nav-link text-white">
+                <a href="#earning" class="nav-link text-white">
                     <i class="fas fa-money-bill-wave"></i> Earnings
                 </a>
             </li>
             <li>
-                <a href="#" class="nav-link text-white">
+                <a href="#reviews" class="nav-link text-white">
                     <i class="fas fa-star"></i> Reviews
                 </a>
             </li>
@@ -230,7 +230,7 @@
         <hr>
         <div class="dropdown">
             <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src="/api/placeholder/50/50" alt="profile" class="profile-img me-2">
+                <img src="../images/male.svg" alt="profile" class="profile-img me-2">
                 <strong id="sidebarUsername">John Doe</strong>
             </a>
             <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
@@ -289,7 +289,7 @@
                 <div class="card stats-card">
                     <div class="card-body">
                         <h5 class="card-title">Total Earnings</h5>
-                        <h2 class="card-text">$4,325</h2>
+                        <h2 class="card-text">24,325</h2>
                         <p class="card-text"><small>+8% from last month</small></p>
                     </div>
                 </div>
@@ -324,7 +324,7 @@
 
         <div class="row">
             <!-- Recent Jobs -->
-            <div class="col-md-8">
+            <div class="col-md-8" id="jobs">
                 <div class="card">
                     <div class="card-header bg-white">
                         <div class="d-flex justify-content-between align-items-center">
@@ -346,7 +346,7 @@
                                         <small class="text-muted ms-3"><i class="fas fa-calendar"></i> Apr 2, 2025</small>
                                     </div>
                                     <div>
-                                        <span class="fw-bold">$120.00</span>
+                                        <span class="fw-bold">1000.00</span>
                                     </div>
                                 </div>
                             </div>
@@ -364,7 +364,7 @@
                                         <small class="text-muted ms-3"><i class="fas fa-calendar"></i> Apr 5, 2025</small>
                                     </div>
                                     <div>
-                                        <span class="fw-bold">$180.00</span>
+                                        <span class="fw-bold">1500.00</span>
                                     </div>
                                 </div>
                             </div>
@@ -382,7 +382,7 @@
                                         <small class="text-muted ms-3"><i class="fas fa-calendar"></i> Apr 3-4, 2025</small>
                                     </div>
                                     <div>
-                                        <span class="fw-bold">$350.00</span>
+                                        <span class="fw-bold">5000.00</span>
                                     </div>
                                 </div>
                             </div>
@@ -391,7 +391,7 @@
                 </div>
 
                 <!-- Earnings Chart -->
-                <div class="card mt-4">
+                <div class="card mt-4" id="earning">
                     <div class="card-header bg-white">
                         <h5 class="mb-0">Monthly Earnings</h5>
                     </div>
@@ -408,7 +408,7 @@
                 <!-- Profile Quick View -->
                 <div class="card mb-4">
                     <div class="card-body text-center">
-                        <img src="/api/placeholder/100/100" alt="profile" class="rounded-circle mb-3" style="width: 100px; height: 100px; object-fit: cover; border: 3px solid #007bff;">
+                        <img src="../images/male.svg" alt="profile" class="rounded-circle mb-3" style="width: 100px; height: 100px; object-fit: cover; border: 3px solid #007bff;">
                         <h5 class="card-title" id="profileFullName">John Doe</h5>
                         <p class="card-text text-muted" id="profileProfession">Electrician & Plumber</p>
                         <div class="rating mb-3">
@@ -429,7 +429,7 @@
                 </div>
 
                 <!-- Upcoming Appointments -->
-                <div class="card mb-4">
+                <div class="card mb-4" id="schedule">
                     <div class="card-header bg-white">
                         <h5 class="mb-0">Upcoming Appointments</h5>
                     </div>
@@ -455,7 +455,7 @@
                 </div>
 
                 <!-- Recent Reviews -->
-                <div class="card">
+                <div class="card" id="reviews">
                     <div class="card-header bg-white">
                         <h5 class="mb-0">Recent Reviews</h5>
                     </div>
@@ -638,6 +638,420 @@
             
             // Update UI with user data
             updateUIWithUserData();
+        });
+
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Keep your existing code intact
+            
+            // API URL for backend interactions
+            const API_URL = 'http://localhost:3000/api'; // Update with your actual API URL
+        
+            // Helper function to show toast notifications - keep your existing function
+            
+            // Add these new functions below your existing code:
+            
+            // Make profile and settings buttons active and functional
+            function activateProfileSettingsButtons() {
+                // Get references to the sidebar profile and settings links
+                const profileLink = document.querySelector('.nav-link:has(i.fas.fa-user-circle)');
+                const settingsLink = document.querySelector('.nav-link:has(i.fas.fa-cog)');
+                
+                // Get reference to the Edit Profile button
+                const editProfileBtn = document.querySelector('.btn.btn-primary');
+                
+                if (profileLink) {
+                    // Add active class handling for profile link
+                    profileLink.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        // Remove active class from all nav links
+                        document.querySelectorAll('.sidebar .nav-link').forEach(link => {
+                            link.classList.remove('active');
+                        });
+                        // Add active class to this link
+                        this.classList.add('active');
+                        
+                        // Show profile editing interface (in a real app, you might show a modal or redirect)
+                        showProfileEdit();
+                    });
+                }
+                
+                if (settingsLink) {
+                    // Add active class handling for settings link
+                    settingsLink.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        // Remove active class from all nav links
+                        document.querySelectorAll('.sidebar .nav-link').forEach(link => {
+                            link.classList.remove('active');
+                        });
+                        // Add active class to this link
+                        this.classList.add('active');
+                        
+                        // Show settings interface (in a real app, you might show a modal or redirect)
+                        showSettings();
+                    });
+                }
+                
+                if (editProfileBtn) {
+                    // Make the Edit Profile button functional
+                    editProfileBtn.addEventListener('click', function() {
+                        showProfileEdit();
+                    });
+                }
+                
+                // Create Settings button next to Edit Profile
+                const createSettingsButton = () => {
+                    // Create a settings button if it doesn't exist yet
+                    if (!document.querySelector('.settings-btn')) {
+                        const editProfileBtn = document.querySelector('.btn.btn-primary');
+                        if (editProfileBtn) {
+                            const settingsBtn = document.createElement('button');
+                            settingsBtn.className = 'btn btn-outline-secondary settings-btn ms-2';
+                            settingsBtn.innerHTML = '<i class="fas fa-cog me-2"></i>Settings';
+                            settingsBtn.addEventListener('click', function() {
+                                showSettings();
+                            });
+                            
+                            // Insert settings button after edit profile button
+                            editProfileBtn.insertAdjacentElement('afterend', settingsBtn);
+                        }
+                    }
+                };
+                
+                createSettingsButton();
+            }
+            
+            // Function to show profile edit modal
+            function showProfileEdit() {
+                // First check if modal exists, if not create it
+                let editProfileModal = document.getElementById('editProfileModal');
+                
+                if (!editProfileModal) {
+                    // Create modal structure
+                    const modalHTML = `
+                        <div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header bg-primary text-white">
+                                        <h5 class="modal-title" id="editProfileModalLabel">Edit Profile</h5>
+                                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form id="profileForm">
+                                            <div class="row">
+                                                <div class="col-md-6 mb-3">
+                                                    <label for="firstName" class="form-label">First Name</label>
+                                                    <input type="text" class="form-control" id="firstName" placeholder="First Name">
+                                                </div>
+                                                <div class="col-md-6 mb-3">
+                                                    <label for="lastName" class="form-label">Last Name</label>
+                                                    <input type="text" class="form-control" id="lastName" placeholder="Last Name">
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="mb-3">
+                                                <label for="profession" class="form-label">Profession</label>
+                                                <input type="text" class="form-control" id="profession" placeholder="e.g. Electrician, Plumber">
+                                            </div>
+                                            
+                                            <div class="mb-3">
+                                                <label for="skills" class="form-label">Skills (comma separated)</label>
+                                                <input type="text" class="form-control" id="skills" placeholder="e.g. Electrical, Plumbing, Repairs">
+                                            </div>
+                                            
+                                            <div class="mb-3">
+                                                <label for="phone" class="form-label">Phone Number</label>
+                                                <input type="tel" class="form-control" id="phone" placeholder="Phone Number">
+                                            </div>
+                                            
+                                            <div class="mb-3">
+                                                <label for="email" class="form-label">Email address</label>
+                                                <input type="email" class="form-control" id="email" placeholder="Email address">
+                                            </div>
+                                            
+                                            <div class="mb-3">
+                                                <label for="bio" class="form-label">Bio</label>
+                                                <textarea class="form-control" id="bio" rows="3" placeholder="Write a short bio"></textarea>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                        <button type="button" class="btn btn-primary" id="saveProfileBtn">Save Changes</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    
+                    // Append modal to body
+                    document.body.insertAdjacentHTML('beforeend', modalHTML);
+                    editProfileModal = document.getElementById('editProfileModal');
+                    
+                    // Handle save profile button
+                    document.getElementById('saveProfileBtn').addEventListener('click', function() {
+                        saveProfileChanges();
+                        const bsModal = bootstrap.Modal.getInstance(editProfileModal);
+                        bsModal.hide();
+                    });
+                }
+                
+                // Populate form with existing data
+                populateProfileForm();
+                
+                // Show the modal
+                const profileModal = new bootstrap.Modal(editProfileModal);
+                profileModal.show();
+            }
+            
+            // Function to show settings modal
+            function showSettings() {
+                // First check if modal exists, if not create it
+                let settingsModal = document.getElementById('settingsModal');
+                
+                if (!settingsModal) {
+                    // Create modal structure
+                    const modalHTML = `
+                        <div class="modal fade" id="settingsModal" tabindex="-1" aria-labelledby="settingsModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header bg-primary text-white">
+                                        <h5 class="modal-title" id="settingsModalLabel">Settings</h5>
+                                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="list-group">
+                                            <div class="list-group-item d-flex justify-content-between align-items-center">
+                                                <div>
+                                                    <h6 class="mb-1">Email Notifications</h6>
+                                                    <p class="text-muted mb-0 small">Receive job alerts via email</p>
+                                                </div>
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" id="emailNotificationsSwitch" checked>
+                                                </div>
+                                            </div>
+                                            <div class="list-group-item d-flex justify-content-between align-items-center">
+                                                <div>
+                                                    <h6 class="mb-1">SMS Notifications</h6>
+                                                    <p class="text-muted mb-0 small">Receive job alerts via text message</p>
+                                                </div>
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" id="smsNotificationsSwitch">
+                                                </div>
+                                            </div>
+                                            <div class="list-group-item d-flex justify-content-between align-items-center">
+                                                <div>
+                                                    <h6 class="mb-1">Profile Visibility</h6>
+                                                    <p class="text-muted mb-0 small">Allow clients to find your profile</p>
+                                                </div>
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" id="profileVisibilitySwitch" checked>
+                                                </div>
+                                            </div>
+                                            <div class="list-group-item d-flex justify-content-between align-items-center">
+                                                <div>
+                                                    <h6 class="mb-1">Dark Mode</h6>
+                                                    <p class="text-muted mb-0 small">Use dark theme</p>
+                                                </div>
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" id="darkModeSwitch">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <hr>
+                                        
+                                        <h6 class="mb-3">Account</h6>
+                                        <div class="d-grid gap-2">
+                                            <button class="btn btn-outline-primary" id="changePasswordBtn">Change Password</button>
+                                            <button class="btn btn-outline-danger" id="deleteAccountBtn">Delete Account</button>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                        <button type="button" class="btn btn-primary" id="saveSettingsBtn">Save Changes</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    
+                    // Append modal to body
+                    document.body.insertAdjacentHTML('beforeend', modalHTML);
+                    settingsModal = document.getElementById('settingsModal');
+                    
+                    // Handle save settings button
+                    document.getElementById('saveSettingsBtn').addEventListener('click', function() {
+                        saveSettingsChanges();
+                        const bsModal = bootstrap.Modal.getInstance(settingsModal);
+                        bsModal.hide();
+                    });
+                    
+                    // Handle change password button
+                    document.getElementById('changePasswordBtn').addEventListener('click', function() {
+                        // Here you would show password change modal
+                        showToast('Change password feature will be implemented soon!');
+                    });
+                    
+                    // Handle delete account button
+                    document.getElementById('deleteAccountBtn').addEventListener('click', function() {
+                        if (confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
+                            showToast('Account deletion feature will be implemented soon!');
+                        }
+                    });
+                }
+                
+                // Show the modal
+                const sModal = new bootstrap.Modal(settingsModal);
+                sModal.show();
+            }
+            
+            // Function to populate profile form with current user data
+            function populateProfileForm() {
+                const userDataString = localStorage.getItem('user');
+                
+                if (userDataString) {
+                    try {
+                        const userData = JSON.parse(userDataString);
+                        
+                        // Fill form fields with user data
+                        document.getElementById('firstName').value = userData.firstName || '';
+                        document.getElementById('lastName').value = userData.lastName || '';
+                        document.getElementById('profession').value = userData.profession || '';
+                        document.getElementById('skills').value = userData.skills || '';
+                        document.getElementById('email').value = userData.email || '';
+                        document.getElementById('phone').value = userData.phone || '';
+                        document.getElementById('bio').value = userData.bio || '';
+                        
+                    } catch (error) {
+                        console.error('Error parsing user data:', error);
+                        showToast('Error loading profile data', 'danger');
+                    }
+                }
+            }
+            
+            // Function to save profile changes
+            function saveProfileChanges() {
+                const firstName = document.getElementById('firstName').value;
+                const lastName = document.getElementById('lastName').value;
+                const profession = document.getElementById('profession').value;
+                const skills = document.getElementById('skills').value;
+                const email = document.getElementById('email').value;
+                const phone = document.getElementById('phone').value;
+                const bio = document.getElementById('bio').value;
+                
+                // Get current user data
+                let userData = {};
+                const userDataString = localStorage.getItem('user');
+                
+                if (userDataString) {
+                    try {
+                        userData = JSON.parse(userDataString);
+                    } catch (error) {
+                        console.error('Error parsing user data:', error);
+                    }
+                }
+                
+                // Update user data
+                userData.firstName = firstName;
+                userData.lastName = lastName;
+                userData.profession = profession;
+                userData.skills = skills;
+                userData.email = email;
+                userData.phone = phone;
+                userData.bio = bio;
+                
+                // Save updated data
+                localStorage.setItem('user', JSON.stringify(userData));
+                
+                // Update UI
+                updateUIWithUserData();
+                
+                // Show success message
+                showToast('Profile updated successfully!');
+            }
+            
+            // Function to save settings changes
+            function saveSettingsChanges() {
+                const emailNotifications = document.getElementById('emailNotificationsSwitch').checked;
+                const smsNotifications = document.getElementById('smsNotificationsSwitch').checked;
+                const profileVisibility = document.getElementById('profileVisibilitySwitch').checked;
+                const darkMode = document.getElementById('darkModeSwitch').checked;
+                
+                // Get current settings
+                let settings = {};
+                const settingsString = localStorage.getItem('settings');
+                
+                if (settingsString) {
+                    try {
+                        settings = JSON.parse(settingsString);
+                    } catch (error) {
+                        console.error('Error parsing settings:', error);
+                    }
+                }
+                
+                // Update settings
+                settings.emailNotifications = emailNotifications;
+                settings.smsNotifications = smsNotifications;
+                settings.profileVisibility = profileVisibility;
+                settings.darkMode = darkMode;
+                
+                // Save updated settings
+                localStorage.setItem('settings', JSON.stringify(settings));
+                
+                // Apply dark mode if enabled
+                if (darkMode) {
+                    document.body.classList.add('dark-mode');
+                } else {
+                    document.body.classList.remove('dark-mode');
+                }
+                
+                // Show success message
+                showToast('Settings saved successfully!');
+            }
+            
+            // Initialize the profile and settings buttons
+            activateProfileSettingsButtons();
+        
+            // Add style for dark mode if needed
+            const style = document.createElement('style');
+            style.textContent = `
+                .dark-mode {
+                    background-color: #121212;
+                    color: #f8f9fa;
+                }
+                .dark-mode .card {
+                    background-color: #1e1e1e;
+                    color: #f8f9fa;
+                }
+                .dark-mode .sidebar {
+                    background: linear-gradient(to bottom, #003366, #001a33);
+                }
+                .dark-mode .card-header {
+                    background-color: #2c2c2c !important;
+                }
+                .settings-btn {
+                    transition: all 0.3s ease;
+                }
+                .settings-btn:hover {
+                    background-color: #6c757d;
+                    color: white;
+                }
+            `;
+            document.head.appendChild(style);
+            
+            // Check for existing settings and apply them
+            const settingsString = localStorage.getItem('settings');
+            if (settingsString) {
+                try {
+                    const settings = JSON.parse(settingsString);
+                    if (settings.darkMode) {
+                        document.body.classList.add('dark-mode');
+                    }
+                } catch (error) {
+                    console.error('Error parsing settings:', error);
+                }
+            }
         });
     </script>
 </body>
